@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Crud Proveedores</title>
+	<script src="https://ajax.googleapis.com/ajax/libs(jquery/3.5.1/jquery,min.js"></script>
+	<script>
+		$(document).ready(function(){
+			function ruta(servicio){
+				var getUrl = window.location;
+				var baseUrl = getUrl.protocol + "//" + getUrl.hostname + ":8080/";
+				return baseUrl+servicio
+			}
+			$("#crearProveedor").click(function(){
+				let url = ruta("crearProveedor");
+				let nombreProveedor1 = $("#nombreProveedor").val();
+				let ubicacionProveedor1 = $("#ubicacionProvedor").val();
+				let horarioProveedor1 = $("#horarioProveedor").val();
+				let envioProveedor1 = $("#envioProveedor").val();
+				let proveedor = {
+						nombreProveedor : nombreProveedor1,
+						ubicacionProveedor : ubicacionProveedor1,
+						horarioProveedor : horarioProveedor1,
+						envioProveedor : envioProveedor1
+				}
+				$.ajax({
+					type: "POST",
+					data: JSON.stringify(proveedor),
+					url: url,
+					contentType: "application/json",
+					success: function(){
+						$("#respuesta").html("Se agrego el libro");
+						
+					},
+					error: function(){
+						$("#respuesta").html("No se pudo agregar el libro");
+					}
+				});
+			})
+			
+		});
+	</script>
+</head>
+<body>
+	<div> 
+		<h1>Proveedores</h1>
+		<label for="nombreProveedor">Nombre: </label>
+		<input type="text" id="nombreProveedor" name="nombreProveedor"><br>
+		<label for="ubicacionProveedor">Ubicacion:</label>
+		<input type="text" id="ubicacionProveedor" name="ubicacionProveedor"><br>
+		<label for="horarioProveedor">Horario:</label>
+		<input type="text" id="horarioProveedor" name="horarioProveedor"><br>
+		<label for="envioProveedor">Envio:</label>
+		<input type="text" id="envioProveedor" name="envioProveedor"><br>
+		<div>
+			<button id="crearProveedor">Crear proveedor</button>
+			<button id="listarProveedores">Listar proveedor</button>
+		</div>
+	</div>
+	<div id="respuesta"></div>
+</body>
+</html>

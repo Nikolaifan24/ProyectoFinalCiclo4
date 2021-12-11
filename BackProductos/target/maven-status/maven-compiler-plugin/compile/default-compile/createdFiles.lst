@@ -1,0 +1,12 @@
+co\hackaton\proyectoODS\dto\ProveedoresDto.class
+co\hackaton\proyectoODS\ProveedoresController.class
+co\hackaton\proyectoODS\dao\ProveedoresDao.class
+co\hackaton\proyectoODS\dao\AlimentosDao.class
+co\hackaton\proyectoODS\dao\BeneficiariosDao.class
+co\hackaton\proyectoODS\ProyectoOdsApplication.class
+co\hackaton\proyectoODS\BeneficiariosController.class
+co\hackaton\proyectoODS\SwaggerConfig.class
+co\hackaton\proyectoODS\dto\BeneficiariosDto.class
+co\hackaton\proyectoODS\dto\AlimentosDto.class
+co\hackaton\proyectoODS\ServletInitializer.class
+co\hackaton\proyectoODS\AlimentosController.class
