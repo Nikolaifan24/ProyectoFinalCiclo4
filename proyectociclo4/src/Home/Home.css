@@ -1,0 +1,77 @@
+:root {
+  --backgroundColor: rgb(242, 242, 242);
+  --backgroundShadow: rgba(192, 192, 192, 0.5);
+  --buttonColor: rgb(243, 87, 84);
+  --whiteText: rgb(255, 255, 255);
+  --blacktext: rgb(0, 0, 0);
+  --textBox: rgb(180, 180, 180);
+}
+
+/* temporal */
+
+
+.gift-container{
+  max-width: 2000px;
+  max-height: 2000px;
+  position: sticky;
+  /* left: 25%;   */
+  display: inline;
+}
+
+.show-menu-header {
+  background: var(--backgroundColor);
+  color: var(--blacktext);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.login-form {
+  background: transparent;
+  box-shadow: 0 0 1rem var(--backgroundShadow);
+  min-height: 10rem;
+  margin: auto;
+  max-width: 50%;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+
+.show-menu-submit {
+  border: 0 solid;
+  border-radius: 1rem;
+  background: var(--blacktext);
+  color: var(--whiteText);
+  display: block;
+  margin: 1rem auto;
+  width: 9rem;
+  height: 2rem;
+  font-weight: 500;
+  min-width: 1px;
+  padding: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 250ms background ease-in;
+  transition: all 0.3s cubic-bezier(0.67, 0.17, 0.4, 0.83);
+}
+
+.show-menu-submit:hover {
+  background: var(--buttonColor);
+  color: var(--whiteText);
+  transition: 250ms background ease-in;
+}
+.tittle {
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: 700;
+  text-align: center;
+}

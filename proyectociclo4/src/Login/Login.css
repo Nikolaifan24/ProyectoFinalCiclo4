@@ -1,0 +1,59 @@
+:root {
+  --backgroundColor: rgb(242, 242, 242);
+  --backgroundShadow: rgba(192, 192, 192, 0.5);
+  --buttonColor: rgb(243, 87, 84);
+  --whiteText: rgb(255, 255, 255);
+  --blacktext: rgb(0, 0, 0);
+  --textBox: rgb(180, 180, 180);
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo-margin {
+  height: auto;
+  pointer-events: none;
+}
+
+.App-header {
+  background: var(--backgroundColor);
+  color: var(--blacktext);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.responsive {
+  width: 40%;
+  height: auto;
+}
+
+.back-email {
+  background-size: cover;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.login-form {
+  background: transparent;
+  box-shadow: 0 0 1rem var(--backgroundShadow);
+  min-height: 10rem;
+  margin: auto;
+  /* max-width: 40%; */
+  padding: 0.5rem;
+  border-radius: 1rem;
+  text-align: center;
+}
