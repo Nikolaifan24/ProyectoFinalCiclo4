@@ -46,21 +46,20 @@ public class VentaDao {
 		}
 	}
 	
-	public boolean crear(VentaDto ventaDto) {
+	
+	/*public boolean ValordeVenta(VentaDto ventaDto) {
+		Double valorU = Double.parseDouble(ventaDto.getValorUnitario());
+		Double ivaCompra = Double.parseDouble(ventaDto.getValorIvaProducto());
+		Integer cantidadProducto = Integer.parseInt(ventaDto.getCantidadProducto());
+		Double valorProductos = valorU * cantidadProducto;
+		Double valorIvas = ivaCompra * cantidadProducto;
+		Double valorVenta = valorProductos + valorIvas;
 		boolean rta = false;
 		try {
 			Document documento = new Document("_id", new ObjectId());
-			documento.append("codigoVenta", ventaDto.getCodigoVenta())
-					 .append("cedulaCliente", ventaDto.getCedulaCliente())
-					 .append("codigoProducto", ventaDto.getCodigoProducto())
-					 .append("cantidadProducto", ventaDto.getCantidadProducto())
-					 .append("valorUnitario", ventaDto.getValorUnitario())
-					 .append("valorProducto", ventaDto.getValorProducto())
-					 .append("valorIvaProducto", ventaDto.getValorIvaProducto())
-					 .append("valorTotalVenta", ventaDto.getValorTotalVenta())
-					 .append("valorTotalIva", ventaDto.getValorTotalIva())
-					 .append("valorTotalVentaConIva", ventaDto.getValorTotalVentaConIva())
-					 .append("precioVenta", ventaDto.getPrecioVenta());
+			documento.append("valorTotalVenta", valorProductos )
+					 .append("valorTotalIva", valorIvas )
+					 .append("VentaconIva", valorVenta);
 			ventas.insertOne(documento);
 			System.out.println("Documento creado");
 			this.cerrar();
@@ -68,6 +67,53 @@ public class VentaDao {
 		} catch (Exception e) {
 			System.out.println("No se pudo agregar el documento");
 		}
+		return rta;
+		
+	}*/
+	
+	public boolean crear(VentaDto ventaDto) {
+		
+		boolean rta = false;
+		double total1 =  ventaDto.getValorUnitario1()*ventaDto.getCantidadProducto1();
+		double total2 =  ventaDto.getValorUnitario2()*ventaDto.getCantidadProducto2();
+		double total3 =  ventaDto.getValorUnitario3()*ventaDto.getCantidadProducto3();
+		double totalVentasin = total1 + total2 + total3;
+		double totaliva = totalVentasin*0.19;
+		double totalVentacon = totalVentasin +totaliva;
+		try {
+			
+			Document documento = new Document("_id", new ObjectId());
+			documento.append("codigoVenta", ventaDto.getCodigoVenta())
+					 .append("cedulaCliente", ventaDto.getCedulaCliente())
+					 .append("codigoProducto1", ventaDto.getCodigoProducto1())
+					 .append("cantidadProducto1", ventaDto.getCantidadProducto1())
+					 .append("valorUnitario1", ventaDto.getValorUnitario1())
+					 .append("codigoProducto2", ventaDto.getCodigoProducto2())
+					 .append("cantidadProducto2", ventaDto.getCantidadProducto2())
+					 .append("valorUnitario2", ventaDto.getValorUnitario2())
+					 .append("codigoProducto3", ventaDto.getCodigoProducto3())
+					 .append("cantidadProducto3", ventaDto.getCantidadProducto3())
+					 .append("valorUnitario3", ventaDto.getValorUnitario3())
+			         .append("valorProducto1", ventaDto.getValorUnitario1()*ventaDto.getCantidadProducto1())
+			         .append("valorProducto2", ventaDto.getValorUnitario2()*ventaDto.getCantidadProducto2())
+			         .append("valorProducto3", ventaDto.getValorUnitario3()*ventaDto.getCantidadProducto3())
+			         .append("valorTotalVenta",totalVentasin )
+			         .append("valorTotalIva",totaliva )
+			         .append("valorTotalVentaConIva",totalVentacon );
+			         /*.append("valorTotalIva", ventaDto.getValorTotalVenta())
+					 .append("valorTotalVentaConIva",  ventaDto.getValorTotalVenta()+ventaDto.getValorTotalVenta()*0.19);*/
+					 /*.append("valorTotalVenta",  )
+					 .append("valorTotalIva", valorIvas )
+					 .append("VentaconIva", valorVenta);*/
+					 
+			ventas.insertOne(documento);
+			System.out.println("Documento creado");
+			this.cerrar();
+			rta = true;
+		} catch (Exception e) {
+			System.out.println("No se pudo agregar el documento");
+		}
+		//ValordeVenta(ventaDto);
 		return rta;
 	}
 	
@@ -79,16 +125,24 @@ public class VentaDao {
 				VentaDto nuevo = new VentaDto();
 				nuevo.setCodigoVenta(doc.getString("codigoVenta"));
 				nuevo.setCedulaCliente(doc.getString("cedulaCliente"));
-				nuevo.setCodigoProducto(doc.getString("codigoProducto"));
-				nuevo.setCantidadProducto(doc.getString("cantidadProducto"));
-				nuevo.setValorUnitario(doc.getString("valorUnitario"));
-				nuevo.setValorProducto(doc.getString("valorProducto"));
-				nuevo.setValorIvaProducto(doc.getString("valorIvaProducto"));
-				nuevo.setValorTotalVenta(doc.getString("valorTotalVenta"));
-				nuevo.setValorTotalIva(doc.getString("valorTotalIva"));
-				nuevo.setValorTotalVentaConIva(doc.getString("valorTotalVentaConIva"));
-				nuevo.setPrecioVenta(doc.getString("precioVenta"));
-			listado.add(nuevo);
+				nuevo.setCodigoProducto1(doc.getString("codigoProducto1"));
+				nuevo.setCantidadProducto1(doc.getInteger("cantidadProducto1"));
+				nuevo.setValorUnitario1(doc.getDouble("valorUnitario1"));
+				nuevo.setCodigoProducto2(doc.getString("codigoProducto2"));
+				nuevo.setCantidadProducto2(doc.getInteger("cantidadProducto2"));
+				nuevo.setValorUnitario2(doc.getDouble("valorUnitario2"));
+				nuevo.setCodigoProducto3(doc.getString("codigoProducto3"));
+				nuevo.setCantidadProducto3(doc.getInteger("cantidadProducto3"));
+				nuevo.setValorUnitario3(doc.getDouble("valorUnitario3"));
+				nuevo.setValorProducto1(doc.getDouble("valorProducto1"));
+				nuevo.setValorProducto2(doc.getDouble("valorProducto2"));
+				nuevo.setValorProducto3(doc.getDouble("valorProducto3"));
+				nuevo.setValorTotalVenta(doc.getDouble("valorTotalVenta"));
+				nuevo.setValorTotalIva(doc.getDouble("valorTotalIva"));
+				nuevo.setValorTotalVentaConIva(doc.getDouble("valorTotalVentaConIva"));
+				
+				
+				listado.add(nuevo);
 			}
 			System.out.println("Listado generado");
 		} catch (Exception e) {
@@ -117,15 +171,22 @@ public class VentaDao {
 				VentaDto nuevo = new VentaDto();
 				nuevo.setCodigoVenta(doc.getString("codigoVenta"));
 				nuevo.setCedulaCliente(doc.getString("cedulaCliente"));
-				nuevo.setCodigoProducto(doc.getString("codigoProducto"));
-				nuevo.setCantidadProducto(doc.getString("cantidadProducto"));
-				nuevo.setValorUnitario(doc.getString("valorUnitario"));
-				nuevo.setValorProducto(doc.getString("valorProducto"));
-				nuevo.setValorIvaProducto(doc.getString("valorIvaProducto"));
-				nuevo.setValorTotalVenta(doc.getString("valorTotalVenta"));
-				nuevo.setValorTotalIva(doc.getString("valorTotalIva"));
-				nuevo.setValorTotalVentaConIva(doc.getString("valorTotalVentaConIva"));
-				nuevo.setPrecioVenta(doc.getString("precioVenta"));
+				nuevo.setCodigoProducto1(doc.getString("codigoProducto1"));
+				nuevo.setCantidadProducto1(doc.getInteger("cantidadProducto1"));
+				nuevo.setValorUnitario1(doc.getDouble("valorUnitario1"));
+				nuevo.setCodigoProducto2(doc.getString("codigoProducto2"));
+				nuevo.setCantidadProducto2(doc.getInteger("cantidadProducto2"));
+				nuevo.setValorUnitario2(doc.getDouble("valorUnitario2"));
+				nuevo.setCodigoProducto3(doc.getString("codigoProducto3"));
+				nuevo.setCantidadProducto3(doc.getInteger("cantidadProducto3"));
+				nuevo.setValorUnitario3(doc.getDouble("valorUnitario3"));
+				nuevo.setValorProducto1(doc.getDouble("valorProducto1"));
+				nuevo.setValorProducto2(doc.getDouble("valorProducto2"));
+				nuevo.setValorProducto3(doc.getDouble("valorProducto3"));
+				nuevo.setValorTotalVenta(doc.getDouble("valorTotalVenta"));
+				nuevo.setValorTotalIva(doc.getDouble("valorTotalIva"));
+				nuevo.setValorTotalVentaConIva(doc.getDouble("valorTotalVentaConIva"));
+				
 				listado.add(nuevo);
 			}
 			System.out.println("Documento encontrado");
@@ -137,33 +198,6 @@ public class VentaDao {
 		
 	}
 	
-	public boolean actualizar(String codigoVenta, VentaDto ventaDto) {
-		boolean rta = false;
-		try {
-			
-			Document documento = new Document();
-			documento.append("codigoVenta", ventaDto.getCodigoVenta())
-			 .append("cedulaCliente", ventaDto.getCedulaCliente())
-			 .append("codigoProducto", ventaDto.getCodigoProducto())
-			 .append("cantidadProducto", ventaDto.getCantidadProducto())
-			 .append("valorUnitario", ventaDto.getValorUnitario())
-			 .append("valorProducto", ventaDto.getValorProducto())
-			 .append("valorIvaProducto", ventaDto.getValorIvaProducto())
-			 .append("valorTotalVenta", ventaDto.getValorTotalVenta())
-			 .append("valorTotalIva", ventaDto.getValorTotalIva())
-			 .append("valorTotalVentaConIva", ventaDto.getValorTotalVentaConIva())
-			 .append("precioVenta", ventaDto.getPrecioVenta());
-			
-			Document filtro = new Document("codigoVenta", codigoVenta);
-			UpdateResult estado = ventas.replaceOne(filtro, documento);
-			System.out.println("Documento actualizado");
-			this.cerrar();
-			rta = true;
-		} catch (Exception e) {
-			System.out.println("No se pudo actualizar el documento");
-		}
-		return rta;
-	}
 	
 	
 }

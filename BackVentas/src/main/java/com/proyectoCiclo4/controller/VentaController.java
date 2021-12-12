@@ -51,13 +51,13 @@ public class VentaController {
 		return listado;
 	}
 	
-	@PutMapping("/actualizarVenta/{codigoVenta}")
+	/*@PutMapping("/actualizarVenta/{codigoVenta}")
 	public boolean actualizarVenta(@PathVariable("codigoVenta") String codigoVenta, @RequestBody VentaRequestDto ventaRequest) {
 		boolean estado = false;
 		VentaDao venta = new VentaDao(getCollectionEnum(ventaRequest.getCiudad()));
 		estado = venta.actualizar(codigoVenta, ventaRequest.getVentaDto());
 		return estado;
-	}
+	}*/
 	
 	private CollectionEnum getCollectionEnum(String ciudad) {
 		return CollectionEnum.valueOf(ciudad.toUpperCase());
